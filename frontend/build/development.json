@@ -1,0 +1,15 @@
+{
+  "BACKEND_ADDRESS": "localhost:8888",
+  "IS_DEBUG": true,
+  "ELECTRON_IGNORE_SSL": true,
+  "PUBLIC_PATH": null,
+  "GOOGLE_OAUTH_2_CLIENT_ID": false,
+  "FACEBOOK_APP_ID": false,
+  "RECAPTCHA_PUBLIC_KEY": false,
+  "AUTO_REGISTRATION": false,
+  "ISSUES": false,
+  "GIPHY_API_KEY": "thZMTtWsaBQAPDIAY461GzYTctuYIeIj",
+
+  "FLAGS": true,
+  "WEBRTC_CONFIG": {"iceServers":[{"urls":["stun:turn2.l.google.com"]}]}
+}

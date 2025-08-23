@@ -1,0 +1,43 @@
+@import "@/assets/sass/partials/variables"
+
+
+.color-white
+  color: white
+  background-color: #515151
+
+  a
+    color: #50547b
+
+  @mixin button($bg, $br, $bgh, $brh, $bga, $bra)
+    color: #fff
+    background: linear-gradient(135deg, $bg 0%, lighten($bg, 10%) 100%)
+    border: 2px solid $br
+    outline: none
+    display: inline-block
+    padding: 10px 20px
+    margin-bottom: 0
+    font-size: 14px
+    font-weight: 500
+    line-height: 1.42857143
+    cursor: pointer
+    user-select: none
+    border-radius: 8px
+    transition: all 0.3s ease
+    &:hover
+      background: linear-gradient(135deg, $bgh 0%, lighten($bgh, 10%) 100%)
+      border: 2px solid $brh
+      transform: translateY(-2px)
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15)
+    &:active
+      background: linear-gradient(135deg, $bga 0%, lighten($bga, 5%) 100%)
+      border: 2px solid $bra
+      transform: translateY(0)
+
+  .lor-btn
+    @include button(#3498DB, #2980B9, #5DADE2, #3498DB, #2980B9, #1F618D)
+
+  .green-btn
+    @include button(#27AE60, #229954, #58D68D, #27AE60, #1E8449, #196F3D)
+
+  input::-webkit-file-upload-button
+    @include button(#3498DB, #2980B9, #5DADE2, #3498DB, #2980B9, #1F618D)

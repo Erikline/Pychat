@@ -1,0 +1,16 @@
+{
+  "name": "Pychat",
+  "short_name": "Pychat",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "620421656154",
+  "background_color": "#ffffff",
+  "description": "Opensource web chat",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

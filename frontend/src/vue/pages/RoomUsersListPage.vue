@@ -1,0 +1,156 @@
+<template>
+  <div class="current-room-users-table">
+    <div class="current-room-users-table-header">
+      {{ title }} <b>{{ room.name }}</b>
+    </div>
+    <ul :class="ulClass">
+      <li v-for="user in usersArray" :key="user.id">
+        <user-flag-row :user="user"/>
+      </li>
+    </ul>
+    <template v-if="showInviteUsers">
+      <div class="current-room-users-table-header">
+        邀请更多用户
+      </div>
+      <div class="holder">
+        <pick-user
+          v-model="userdToAdd"
+          :users-ids="userIds"
+        />
+        <app-submit
+          :running="running"
+          class="green-btn"
+          type="button"
+          value="应用"
+          @click.native="add"
+        />
+      </div>
+    </template>
+  </div>
+</template>
+<script lang="ts">
+import {
+  Component,
+  Vue,
+} from "vue-property-decorator";
+import {
+  ApplyGrowlErr,
+  State,
+} from "@/ts/instances/storeInstance";
+import {
+  ChannelsDictUIModel,
+  RoomDictModel,
+  UserDictModel,
+} from "@/ts/types/model";
+import AppSubmit from "@/vue/ui/AppSubmit.vue";
+import PickUser from "@/vue/parts/PickUser.vue";
+import UserFlagRow from "@/vue/chat/right/UserFlagRow.vue";
+
+@Component({
+  name: "RoomUsersListPage",
+  components: {
+    UserFlagRow,
+    AppSubmit,
+    PickUser,
+  },
+})
+export default class RoomUsersListPage extends Vue {
+  @State
+  public readonly allUsersDict!: UserDictModel;
+
+  @State
+  public readonly roomsDict!: RoomDictModel;
+
+  @State
+  public readonly channelsDictUI!: ChannelsDictUIModel;
+
+
+  public userdToAdd: number[] = [];
+
+  public running: boolean = false;
+
+  get showInviteUsers() {
+    return this.userIds.length > 0;
+  }
+
+  get ulClass() {
+    return {
+      "current-room-users-table-header-single": !this.showInviteUsers,
+    };
+  }
+
+  public get roomId(): number {
+    return parseInt(this.$route.params.id as string);
+  }
+
+  public get room() {
+    return this.roomsDict[this.roomId];
+  }
+
+  public get title() {
+    return this.room.isMainInChannel ? "群组成员" : "房间成员";
+  }
+
+  public get usersArray() {
+    return this.room.users.map((id) => this.allUsersDict[id]);
+  }
+
+  public get userIds(): number[] {
+    if (this.room.channelId && !this.room.isMainInChannel) {
+      return this.channelsDictUI[this.room.channelId].mainRoom.users.filter((uId) => !this.room.users.includes(uId));
+    }
+    return this.$store.usersArray.filter((u) => !this.room.users.includes(u.id)).map((u) => u.id);
+  }
+
+  @ApplyGrowlErr({runningProp: "running"})
+  async add() {
+    if (this.userdToAdd.length > 0) {
+      const e = await this.$ws.inviteUser(this.roomId, this.userdToAdd);
+      this.$router.replace(`/chat/${e.roomId}`);
+    } else {
+      this.$store.growlError("请至少选择一个用户");
+    }
+  }
+}
+</script>
+<!-- eslint-disable -->
+<style lang="sass" scoped>
+@import "@/assets/sass/partials/room_users_table"
+
+@import "@/assets/sass/partials/abstract_classes"
+
+.current-room-users-table-header
+  font-size: 20px
+  padding: 10px
+
+.holder
+  @extend %room-settings-holder
+  height: initial // TODO rd87
+
+
+.green-btn
+  flex-shrink: 0
+
+.current-room-users-table
+  font-size: 24px
+  width: 350px
+  margin: auto
+
+ul
+  overflow-y: scroll // TODO rd87
+  max-height: calc(50vh - 220px) // TODO rd87
+  @extend %ul
+  :deep(li)
+    overflow: initial // TODO rd87 weird bug with zooomed out small li icons when trying to overflow ellipsis text
+  &.current-room-users-table-header-single
+    max-height: calc(100vh - 110px)
+
+li
+  @extend %li
+  justify-content: space-between
+  display: flex
+
+.usersStateText:hover
+  cursor: pointer
+  color: #f1f1f1
+</style>

@@ -1,0 +1,240 @@
+// Apple Design System Theme
+@import "../partials/apple-design-system"
+@import "../partials/apple-mixins"
+
+// Base styles
+*
+  box-sizing: border-box
+
+body
+  font-family: $apple-font-family
+  background: $apple-background-primary
+  color: $apple-label-primary
+  line-height: 1.5
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+// Typography
+h1, h2, h3, h4, h5, h6
+  font-weight: $apple-font-weight-semibold
+  color: $apple-label-primary
+  margin: 0 0 $apple-spacing-md 0
+
+h1
+  font-size: $apple-font-size-3xl
+  font-weight: $apple-font-weight-bold
+
+h2
+  font-size: $apple-font-size-2xl
+  font-weight: $apple-font-weight-bold
+
+h3
+  font-size: $apple-font-size-xl
+
+h4
+  font-size: $apple-font-size-lg
+
+h5
+  font-size: $apple-font-size-md
+
+h6
+  font-size: $apple-font-size-sm
+
+p
+  margin: 0 0 $apple-spacing-md 0
+  color: $apple-label-secondary
+
+// Buttons
+.btn
+  @include apple-button('primary')
+  
+  &.btn-secondary
+    @include apple-button('secondary')
+  
+  &.btn-ghost
+    @include apple-button('ghost')
+  
+  &.btn-small
+    @include apple-button('primary', 'small')
+  
+  &.btn-large
+    @include apple-button('primary', 'large')
+
+// Cards
+.card
+  @include apple-card
+
+// Forms
+.form-control
+  @include apple-input
+
+.form-group
+  margin-bottom: $apple-spacing-lg
+
+label
+  display: block
+  margin-bottom: $apple-spacing-sm
+  font-weight: $apple-font-weight-medium
+  color: $apple-label-primary
+
+// Navigation
+.navbar
+  @include apple-navbar
+
+// Links
+a
+  color: $apple-blue
+  text-decoration: none
+  transition: color 0.2s ease
+  
+  &:hover
+    color: darken($apple-blue, 10%)
+
+// Scrollbar
+::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+::-webkit-scrollbar-track
+  background: $apple-fill-primary
+  border-radius: $apple-radius-sm
+
+::-webkit-scrollbar-thumb
+  background: $apple-gray-400
+  border-radius: $apple-radius-sm
+  
+  &:hover
+    background: $apple-gray-500
+
+// Loading states
+.loading
+  @include apple-shimmer
+  height: 20px
+  border-radius: $apple-radius-sm
+
+// Status indicators
+.status-online
+  @include apple-status-badge($apple-green)
+
+.status-away
+  @include apple-status-badge($apple-orange)
+
+.status-offline
+  @include apple-status-badge($apple-gray-400)
+
+// Glass morphism effects
+.glass
+  @include apple-glass
+
+// Divider
+.divider
+  @include apple-divider
+
+// Animations
+.fade-in
+  animation: fadeIn 0.3s ease-in-out
+
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(10px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.slide-up
+  animation: slideUp 0.3s ease-out
+
+@keyframes slideUp
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+// Responsive utilities
+@media (max-width: 768px)
+  .card
+    margin: $apple-spacing-sm
+    padding: $apple-spacing-md
+  
+  .btn
+    &.btn-large
+      height: 44px
+      padding: 0 $apple-spacing-md
+      font-size: $apple-font-size-md
+
+// Dark mode support
+@media (prefers-color-scheme: dark)
+  body
+    background: #f8fafc
+    color: #111827
+  
+  .card
+    background: #ffffff
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+  
+  .form-control
+    background: #ffffff
+    border-color: #e5e7eb
+    color: #111827
+    
+    &:focus
+      border-color: #3B82F6
+      box-shadow: 0 0 0 3px rgba(#3B82F6, 0.3)
+
+// Utility classes
+.text-center
+  text-align: center
+
+.text-left
+  text-align: left
+
+.text-right
+  text-align: right
+
+.mb-0
+  margin-bottom: 0
+
+.mb-1
+  margin-bottom: $apple-spacing-sm
+
+.mb-2
+  margin-bottom: $apple-spacing-md
+
+.mb-3
+  margin-bottom: $apple-spacing-lg
+
+.mb-4
+  margin-bottom: $apple-spacing-xl
+
+.mt-0
+  margin-top: 0
+
+.mt-1
+  margin-top: $apple-spacing-sm
+
+.mt-2
+  margin-top: $apple-spacing-md
+
+.mt-3
+  margin-top: $apple-spacing-lg
+
+.mt-4
+  margin-top: $apple-spacing-xl
+
+.p-0
+  padding: 0
+
+.p-1
+  padding: $apple-spacing-sm
+
+.p-2
+  padding: $apple-spacing-md
+
+.p-3
+  padding: $apple-spacing-lg
+
+.p-4
+  padding: $apple-spacing-xl

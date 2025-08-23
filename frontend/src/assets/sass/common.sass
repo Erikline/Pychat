@@ -1,0 +1,66 @@
+// Apple Design System
+@import "@/assets/sass/partials/apple-design-system"
+@import "@/assets/sass/partials/apple-mixins"
+@import "@/assets/sass/themes/common_apple"
+
+// Font imports (keep for compatibility)
+$FontPathOpenSans: "npm-font-open-sans/fonts" !default
+@import "npm-font-open-sans/open-sans.scss"
+@import "typeface-oswald/index.css"
+@import "spainter/no-fonts.sass"
+@import "@/assets/sass/partials/animation"
+@import "@/assets/sass/partials/mixins"
+@import "@/assets/sass/partials/fontello"
+
+$FontelloPath: "@/assets/font"
+
+@font-face
+  font-family: 'fontello'
+  src: url('#{$FontelloPath}/fontello.eot')
+  src: url('#{$FontelloPath}/fontello.eot') format('embedded-opentype'), url('#{$FontelloPath}/fontello.woff2') format('woff2'), url('#{$FontelloPath}/fontello.woff') format('woff'), url('#{$FontelloPath}/fontello.ttf') format('truetype'), url('#{$FontelloPath}/fontello.svg') format('svg')
+  font-weight: normal
+  font-style: normal
+
+// Icon styles
+.icon-spin1
+  width: 24px
+  height: 24px
+
+.spinner-main
+  @include spinner(10px, white)
+
+[class^="icon-"]:before, [class*=" icon-"]:before
+  font-family: "fontello"
+  font-style: normal
+  font-weight: normal
+  speak: none
+  display: inline-block
+  text-decoration: inherit
+  width: 1em
+  text-align: center
+  font-variant: normal
+  text-transform: none
+  line-height: 1em
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+// Base styles
+a
+  text-decoration: none
+  color: $apple-blue
+  transition: color 0.2s ease
+  
+  &:hover
+    color: darken($apple-blue, 10%)
+
+body
+  margin: 0
+  font-family: $apple-font-family
+  background: $apple-background-primary
+  color: $apple-label-primary
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+html, body
+  height: 100%
+  overscroll-behavior-y: contain

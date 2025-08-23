@@ -1,0 +1,51 @@
+@import "@/assets/sass/partials/mixins"
+
+.color-reg
+
+  @include scrollbar(#f8fafc, #cbd5e1, #7dc071, #c08b00, #3c763d)
+
+  color: $color-reg-main
+  $cmn-btn-text-color: #d8d8d8
+
+  a
+    color: $color-reg-main
+
+  *
+    outline: none
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 50%, #DEE2E6 100%)
+  min-height: 100vh
+
+  .input
+    background: #FFFFFF
+    border: 2px solid #E9ECEF
+    border-radius: 8px
+    color: #2C3E50
+    padding: 12px 16px
+    font-family: 'Open Sans', Arial, sans-serif
+    transition: all 0.3s ease
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+
+    &:focus
+      border-color: $link-color
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1)
+      outline: none
+
+    &:-webkit-autofill
+      -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important
+      -webkit-text-fill-color: #2C3E50 !important
+
+  .input option
+    background-color: #FFFFFF
+    color: #2C3E50
+
+  .green-btn
+    @include linear-gradient-hover($cmn-btn-text-color, #457741)
+
+  .red-btn
+    @include linear-gradient-hover($cmn-btn-text-color, #A30000)
+
+  .blue-btn
+    @include linear-gradient-hover($cmn-btn-text-color, #353c4c)
+
+  .lor-btn
+    @include linear-gradient-hover($grayish-green, #4f5249)

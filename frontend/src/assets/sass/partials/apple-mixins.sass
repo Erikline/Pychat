@@ -1,0 +1,208 @@
+// Apple Design System Mixins
+@import "apple-design-system"
+
+// Button mixins
+@mixin apple-button($variant: 'primary', $size: 'medium')
+  border: none
+  border-radius: $apple-radius-lg
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif
+  font-weight: $apple-font-weight-medium
+  cursor: pointer
+  transition: all 0.2s ease
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  text-decoration: none
+  
+  @if $size == 'small'
+    height: $apple-button-height-small
+    padding: 0 $apple-spacing-md
+    font-size: $apple-font-size-sm
+  @else if $size == 'large'
+    height: 52px
+    padding: 0 $apple-spacing-xl
+    font-size: $apple-font-size-md
+  @else
+    height: $apple-button-height
+    padding: 0 $apple-spacing-lg
+    font-size: $apple-font-size-md
+
+  @if $variant == 'primary'
+    background: $apple-blue
+    color: white
+    box-shadow: $apple-shadow-sm
+    
+    &:hover
+      background: darken($apple-blue, 8%)
+      box-shadow: $apple-shadow-md
+    
+    &:active
+      background: darken($apple-blue, 15%)
+      transform: scale(0.98)
+  
+  @else if $variant == 'secondary'
+    background: $apple-fill-primary
+    color: $apple-label-primary
+    
+    &:hover
+      background: $apple-fill-secondary
+    
+    &:active
+      background: $apple-fill-tertiary
+      transform: scale(0.98)
+  
+  @else if $variant == 'ghost'
+    background: transparent
+    color: $apple-blue
+    border: 1px solid $apple-blue
+    
+    &:hover
+      background: rgba($apple-blue, 0.1)
+    
+    &:active
+      background: rgba($apple-blue, 0.2)
+
+// Card mixin
+@mixin apple-card
+  background: $apple-background-elevated
+  border-radius: $apple-radius-xl
+  box-shadow: $apple-shadow-sm
+  padding: $apple-card-padding
+  transition: all 0.3s ease
+  
+  &:hover
+    box-shadow: $apple-shadow-md
+    transform: translateY(-1px)
+
+// Input mixin
+@mixin apple-input
+  height: $apple-input-height
+  border: 1px solid $apple-gray-300
+  border-radius: $apple-radius-md
+  padding: 0 $apple-spacing-md
+  font-size: $apple-font-size-md
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif
+  background: $apple-background-elevated
+  color: $apple-label-primary
+  transition: all 0.2s ease
+  
+  &:focus
+    outline: none
+    border-color: $apple-blue
+    box-shadow: 0 0 0 3px rgba($apple-blue, 0.1)
+  
+  &::placeholder
+    color: $apple-label-tertiary
+
+// Navigation bar mixin
+@mixin apple-navbar
+  height: $apple-nav-height
+  background: rgba($apple-background-elevated, 0.8)
+  backdrop-filter: $apple-blur-light
+  border-bottom: 1px solid $apple-fill-primary
+  display: flex
+  align-items: center
+  padding: 0 $apple-spacing-lg
+
+// Message bubble mixin
+@mixin apple-message-bubble($type: 'user')
+  border-radius: $apple-radius-xl
+  padding: $apple-spacing-sm $apple-spacing-md
+  max-width: 70%
+  word-wrap: break-word
+  line-height: 1.4
+  
+  @if $type == 'user'
+    background: $apple-blue
+    color: white
+    margin-left: auto
+  @else
+    background: $apple-fill-primary
+    color: $apple-label-primary
+
+// Avatar mixin
+@mixin apple-avatar($size: 40px)
+  width: $size
+  height: $size
+  border-radius: 50%
+  object-fit: cover
+  border: 2px solid $apple-background-elevated
+  box-shadow: $apple-shadow-sm
+
+// Status badge mixin
+@mixin apple-status-badge($color: $apple-green)
+  width: 12px
+  height: 12px
+  border-radius: 50%
+  background: $color
+  border: 2px solid $apple-background-elevated
+
+// Typography mixins
+@mixin apple-heading-1
+  font-size: $apple-font-size-3xl
+  font-weight: $apple-font-weight-bold
+  line-height: 1.2
+  color: $apple-label-primary
+
+@mixin apple-heading-2
+  font-size: $apple-font-size-2xl
+  font-weight: $apple-font-weight-bold
+  line-height: 1.3
+  color: $apple-label-primary
+
+@mixin apple-heading-3
+  font-size: $apple-font-size-xl
+  font-weight: $apple-font-weight-semibold
+  line-height: 1.4
+  color: $apple-label-primary
+
+@mixin apple-body
+  font-size: $apple-font-size-md
+  font-weight: $apple-font-weight-regular
+  line-height: 1.5
+  color: $apple-label-primary
+
+@mixin apple-caption
+  font-size: $apple-font-size-sm
+  font-weight: $apple-font-weight-regular
+  line-height: 1.4
+  color: $apple-label-secondary
+
+// Animation mixins
+@mixin apple-transition($property: all)
+  transition: $property 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+
+@mixin apple-hover-lift
+  transition: transform 0.2s ease, box-shadow 0.2s ease
+  
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: $apple-shadow-lg
+
+// Glass morphism effect
+@mixin apple-glass($opacity: 0.8)
+  background: rgba($apple-background-elevated, $opacity)
+  backdrop-filter: $apple-blur-light
+  border: 1px solid rgba(255, 255, 255, 0.2)
+
+// Divider mixin
+@mixin apple-divider
+  height: 1px
+  background: $apple-fill-primary
+  margin: $apple-spacing-md 0
+
+// Flexbox utilities
+@mixin flex($grow: 0, $shrink: 1, $basis: auto)
+  flex: $grow $shrink $basis
+
+// Loading shimmer effect
+@mixin apple-shimmer
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)
+  background-size: 200% 100%
+  animation: shimmer 1.5s infinite
+  
+  @keyframes shimmer
+    0%
+      background-position: -200% 0
+    100%
+      background-position: 200% 0

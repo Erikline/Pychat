@@ -1,0 +1,11 @@
+node_modules
+platforms/android/cordova/node_modules
+electron_dist/
+!www/.gitkeep
+.DS_STORE
+platforms/android/app/src/main/assets
+www/*
+.fontello
+build/stats.html
+yarn-error.log
+dist

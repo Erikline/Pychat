@@ -1,0 +1,90 @@
+<template>
+  <form
+    class="holder"
+    method="post"
+    @submit.prevent="saveProfile"
+  >
+    <table>
+      <tbody>
+        <tr>
+          <th>输入您的密码:</th>
+          <td>
+            <input
+              v-model="password"
+              autocomplete="password"
+              class="input"
+              minlength="3"
+              name="password"
+              required
+              type="password"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>邮箱:</th>
+          <td>
+            <input
+              v-model="email"
+              class="input"
+              maxlength="190"
+              type="email"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tr>
+        <td colspan="2">
+          <app-submit
+            :running="running"
+            class="green-btn"
+            value="应用更改"
+          />
+        </td>
+      </tr>
+    </table>
+  </form>
+</template>
+<script lang="ts">
+import {
+  ApplyGrowlErr,
+  State,
+} from "@/ts/instances/storeInstance";
+import {
+  Component,
+  Vue,
+} from "vue-property-decorator";
+import AppSubmit from "@/vue/ui/AppSubmit.vue";
+import {CurrentUserInfoModel} from "@/ts/types/model";
+
+@Component({
+  name: "UserProfileChangeEmail",
+  components: {AppSubmit},
+})
+export default class UserProfileChangeEmail extends Vue {
+  public password: string = "";
+
+  public email: string = "";
+
+  public running: boolean = false;
+
+  @State
+  public readonly userInfo!: CurrentUserInfoModel;
+
+  public created() {
+    this.email = this.userInfo.email;
+  }
+
+  @ApplyGrowlErr({
+    message: "Unable to change email",
+    runningProp: "running",
+  })
+  public async saveProfile() {
+    await this.$api.changeEmailLogin(this.email, this.password);
+    this.$store.growlSuccess("Email has been changed");
+  }
+}
+</script>
+
+<style lang="sass" scoped>
+
+</style>

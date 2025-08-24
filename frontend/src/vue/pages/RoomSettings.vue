@@ -295,28 +295,123 @@ export default class RoomSettings extends Vue {
 <style lang="sass" scoped>
 @import "@/assets/sass/partials/abstract_classes"
 
+.modern-card
+  @extend %room-settings-holder
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border-radius: 15px
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+  padding: 30px
+  margin: 20px
+  backdrop-filter: blur(10px)
+
 .holder
+  @extend %room-settings-holder
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border-radius: 15px
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+  padding: 30px
+  margin: 20px
+  backdrop-filter: blur(10px)
   overflow-y: auto
+  height: 100%
   display: flex
-  justify-content: center
   align-items: center
 
-input[type=text]
-  width: 150px
+.room-heder
+  font-size: 24px
+  font-weight: 600
+  color: #fff
+  text-align: center
+  padding-bottom: 25px
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+  margin-bottom: 20px
+
+.header-icon
+  font-size: 28px
+  margin-right: 10px
+  vertical-align: middle
+
+table
+  width: 100%
+  border-collapse: separate
+  border-spacing: 0 15px
 
 th
+  color: #fff !important
+  font-weight: 500
   text-align: right
-
-th, td
-  padding: 5px
+  padding: 15px 20px
+  background: rgba(255, 255, 255, 0.1)
+  border-radius: 10px 0 0 10px
+  backdrop-filter: blur(5px)
+  width: 40%
 
 td
-  text-align: center
+  padding: 15px 20px
+  background: rgba(255, 255, 255, 0.05)
+  border-radius: 0 10px 10px 0
+  backdrop-filter: blur(5px)
+  text-align: left
 
   > *
-    margin: auto
+    margin: 0
 
-  &[colspan="2"] > *
-    width: 100%
+input[type=text]
+  width: 100%
+  max-width: 200px
+  background: rgba(255, 255, 255, 0.9)
+  border: none
+  border-radius: 8px
+  padding: 12px 15px
+  font-size: 16px
+  transition: all 0.3s ease
 
+  &:focus
+    outline: none
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3)
+    transform: translateY(-1px)
+
+.red-btn
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24)
+  border: none
+  border-radius: 10px
+  padding: 12px 25px
+  font-size: 16px
+  font-weight: 600
+  color: white
+  cursor: pointer
+  transition: all 0.3s ease
+  box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3)
+  width: 100%
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4)
+
+.green-btn
+  background: linear-gradient(135deg, #51cf66, #40c057)
+  border: none
+  border-radius: 10px
+  padding: 12px 25px
+  font-size: 16px
+  font-weight: 600
+  color: white
+  cursor: pointer
+  transition: all 0.3s ease
+  box-shadow: 0 4px 15px rgba(64, 192, 87, 0.3)
+  width: 100%
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 6px 20px rgba(64, 192, 87, 0.4)
+
+b
+  color: #fff !important
+  font-weight: 600
+
+div
+  color: rgba(255, 255, 255, 0.9) !important
+
+span
+  color: rgba(255, 255, 255, 0.9) !important
 </style>

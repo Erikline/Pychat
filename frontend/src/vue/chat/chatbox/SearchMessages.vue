@@ -2,23 +2,28 @@
   <div
     v-show="searchActive"
     :class="{'loading': !!currentRequest}"
-    class="search"
+    class="search modern-search"
   >
+    <div class="search-header">
+      <span class="header-icon">🔍</span> 搜索消息
+    </div>
     <div class="input-holder">
       <input
         ref="inputSearch"
         v-model.trim="search"
-        class="input"
+        class="input search-input"
         type="search"
+        placeholder="输入关键词搜索消息..."
         @keydown="checkToggleSearch"
       />
-      <i class="icon-cancel-circled-outline" @click="close"/>
+      <i class="icon-cancel-circled-outline close-btn" @click="close"/>
       <div class="search-loading"/>
     </div>
     <div
       v-if="searchResultText"
-      class="search_result"
+      :class="['search-result', searchResult === '未找到结果' ? 'no-results' : '']"
     >
+      <span class="result-icon">{{ searchResult === '未找到结果' ? '❌' : '✨' }}</span>
       {{ searchResultText }}
     </div>
   </div>
@@ -154,16 +159,62 @@ export default class SearchMessages extends Vue {
 <style lang="sass" scoped>
 @import "@/assets/sass/partials/mixins"
 
-.icon-cancel-circled-outline
-  @include hover-click(red)
-  cursor: pointer
+.modern-search
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)
+  border-radius: 15px
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1)
+  padding: 25px
+  margin: 15px
+  backdrop-filter: blur(10px)
+
+.search-header
+  font-size: 20px
+  font-weight: 600
+  color: #333
+  text-align: center
+  margin-bottom: 20px
+  padding-bottom: 15px
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+.header-icon
+  font-size: 24px
+  margin-right: 8px
+  vertical-align: middle
 
 .input-holder
   display: flex
-  width: 100%
+  align-items: center
+  background: rgba(255, 255, 255, 0.9)
+  border-radius: 25px
+  padding: 8px 15px
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
+  transition: all 0.3s ease
 
-  .input
+  &:focus-within
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15)
+    transform: translateY(-1px)
+
+  .search-input
     flex-grow: 1
+    border: none
+    background: transparent
+    font-size: 16px
+    padding: 8px 10px
+    outline: none
+    color: #333
+
+    &::placeholder
+      color: #888
+
+  .close-btn
+    @include hover-click(#ff6b6b)
+    cursor: pointer
+    font-size: 20px
+    margin-left: 10px
+    transition: all 0.3s ease
+    
+    &:hover
+      transform: scale(1.1)
 
 .search
   padding: 5px
@@ -173,10 +224,30 @@ export default class SearchMessages extends Vue {
       margin-left: 5px
       margin-bottom: -5px
       margin-top: -3px
-      @include spinner(3px, white)
+      @include spinner(3px, #333)
 
-.search_result
+.search-result
   display: flex
+  align-items: center
   justify-content: center
-  padding-top: 10px
+  padding: 15px 20px
+  margin-top: 15px
+  border-radius: 10px
+  font-size: 16px
+  font-weight: 500
+  transition: all 0.3s ease
+
+  .result-icon
+    margin-right: 8px
+    font-size: 18px
+
+  &.no-results
+    background: rgba(255, 107, 107, 0.1)
+    color: #ff6b6b
+    border: 1px solid rgba(255, 107, 107, 0.3)
+
+  &:not(.no-results)
+    background: rgba(76, 175, 80, 0.1)
+    color: #4caf50
+    border: 1px solid rgba(76, 175, 80, 0.3)
 </style>

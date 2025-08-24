@@ -60,7 +60,7 @@ export const WEBRTC_RUNTIME_CONFIG = (function() {
 const IS_SSL = location.protocol === "https:";
 // Use WSS for WebSocket connection to match Tornado's SSL configuration
 export const WS_API_URL = `wss://${BACKEND_CURRENT_ADDRESS}/ws`;
-export const XHR_API_URL = `http://${BACKEND_CURRENT_ADDRESS}/api`;
+export const XHR_API_URL = `${IS_SSL ? 'https' : 'http'}://${BACKEND_CURRENT_ADDRESS}/api`;
 export const MEDIA_API_URL = ((() => {
   if (PUBLIC_PATH?.endsWith("/")) {
  return PUBLIC_PATH.slice(0, -1);

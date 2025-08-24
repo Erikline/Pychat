@@ -1,5 +1,8 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-page modern-settings">
+    <div class="settings-header">
+      <span class="header-icon">⚙️</span> 个人设置
+    </div>
     <table>
       <tbody>
         <tr>
@@ -14,19 +17,7 @@
             <app-checkbox v-model="model.showWhenITyping"/>
           </td>
         </tr>
-        <tr>
-          <th>内嵌YouTube:</th>
-          <td>
-            <app-checkbox v-model="model.embeddedYoutube"/>
-          </td>
-        </tr>
-        <tr>
-          <th>代码高亮</th>
-          <td>
-            <app-checkbox v-model="model.highlightCode"/>
-            ```console.log('代码高亮示例')```
-          </td>
-        </tr>
+
         <tr>
           <th>消息提示音:</th>
           <td>
@@ -221,11 +212,30 @@ export default class UserProfileSettings extends Vue {
 </script>
 
 <style lang="sass" scoped>
-
 @import "@/assets/sass/partials/abstract_classes"
 
-.lor-btn
-  width: 100%
+.modern-settings
+  @extend %room-settings-holder
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
+  border-radius: 15px
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+  padding: 30px
+  margin: 20px
+  backdrop-filter: blur(10px)
+
+.settings-header
+  font-size: 24px
+  font-weight: 600
+  color: #fff
+  text-align: center
+  padding-bottom: 25px
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+  margin-bottom: 20px
+
+.header-icon
+  font-size: 28px
+  margin-right: 10px
+  vertical-align: middle
 
 .settings-page
   :deep(button)
@@ -235,13 +245,104 @@ export default class UserProfileSettings extends Vue {
 
   :deep(table)
     margin: auto
+    border-collapse: separate
+    border-spacing: 0 15px
+    width: 100%
 
   :deep(th)
+    color: #fff !important
+    font-weight: 500
     text-align: right
+    padding: 15px 20px
+    background: rgba(255, 255, 255, 0.1)
+    border-radius: 10px 0 0 10px
+    backdrop-filter: blur(5px)
+    width: 40%
 
-  :deep(td), :deep(th)
-    padding: 4px
+  :deep(td)
+    padding: 15px 20px
+    background: rgba(255, 255, 255, 0.05)
+    border-radius: 0 10px 10px 0
+    backdrop-filter: blur(5px)
+    text-align: left
 
   :deep(.input)
     @extend %big-input
+    background: rgba(255, 255, 255, 0.9)
+    border: none
+    border-radius: 8px
+    padding: 12px 15px
+    font-size: 16px
+    transition: all 0.3s ease
+    width: 100%
+    max-width: 200px
+    
+    &:focus
+      outline: none
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3)
+      transform: translateY(-1px)
+
+  :deep(.lor-btn)
+    background: linear-gradient(135deg, #74b9ff, #0984e3)
+    border: none
+    border-radius: 10px
+    padding: 12px 25px
+    font-size: 16px
+    font-weight: 600
+    color: white
+    cursor: pointer
+    transition: all 0.3s ease
+    box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3)
+    margin: 5px 0
+    
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 6px 20px rgba(9, 132, 227, 0.4)
+
+  :deep(.green-btn)
+    background: linear-gradient(135deg, #51cf66, #40c057)
+    border: none
+    border-radius: 10px
+    padding: 12px 25px
+    font-size: 16px
+    font-weight: 600
+    color: white
+    cursor: pointer
+    transition: all 0.3s ease
+    box-shadow: 0 4px 15px rgba(64, 192, 87, 0.3)
+    width: 100%
+    
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 6px 20px rgba(64, 192, 87, 0.4)
+
+  :deep(select)
+    background: rgba(255, 255, 255, 0.9)
+    border: none
+    border-radius: 8px
+    padding: 12px 15px
+    font-size: 16px
+    transition: all 0.3s ease
+    cursor: pointer
+    
+    &:focus
+      outline: none
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3)
+
+  :deep(code)
+    background: rgba(0, 0, 0, 0.2)
+    padding: 2px 6px
+    border-radius: 4px
+    color: #fff
+    font-family: 'Courier New', monospace
+
+  :deep(b)
+    color: #fff !important
+    font-weight: 600
+
+  :deep(div)
+    color: rgba(255, 255, 255, 0.9) !important
+
+  :deep(span)
+    color: rgba(255, 255, 255, 0.9) !important
 </style>

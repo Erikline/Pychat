@@ -256,33 +256,78 @@ export default class ChannelSettings extends Vue {
 }
 </script>
 <!-- eslint-disable -->
-<style lang="sass" scoped>
+<style scoped lang="sass">
+@import "@/assets/sass/partials/abstract_classes"
 
 .top-div
-  display: flex
-  justify-content: center
+  overflow-y: auto
+  height: 100%
 
 .holder
+  @extend %room-settings-holder
+  background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%)
+  border-radius: 15px
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+  padding: 30px
+  margin: 20px
+  backdrop-filter: blur(10px)
   overflow-y: auto
+  height: 100%
   display: flex
-  justify-content: center
   align-items: center
 
-  input[type=text]
-    width: 150px
+input[type=text]
+  width: 100%
+  max-width: 200px
+  background: rgba(255, 255, 255, 0.9)
+  border: none
+  border-radius: 8px
+  padding: 12px 15px
+  font-size: 16px
+  transition: all 0.3s ease
+  
+  &:focus
+    outline: none
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3)
+    transform: translateY(-1px)
 
-  th
-    text-align: right
+table
+  width: 100%
+  border-collapse: separate
+  border-spacing: 0 15px
 
-  th, td
-    padding: 5px
+th
+  color: #fff !important
+  font-weight: 500
+  text-align: right
+  padding: 15px 20px
+  background: rgba(255, 255, 255, 0.1)
+  border-radius: 10px 0 0 10px
+  backdrop-filter: blur(5px)
+  width: 40%
 
-  td
-    text-align: center
+td
+  padding: 15px 20px
+  background: rgba(255, 255, 255, 0.05)
+  border-radius: 0 10px 10px 0
+  backdrop-filter: blur(5px)
+  text-align: left
 
-    > *
-      margin: auto
+td[colspan="2"]
+  text-align: center
+  padding: 15px 20px
+  
+  > *
+    width: 100%
+    margin: 5px 0
 
-    &[colspan="2"] > *
-      width: 100%
+b
+  color: #fff !important
+  font-weight: 600
+
+div
+  color: rgba(255, 255, 255, 0.9) !important
+
+span
+  color: rgba(255, 255, 255, 0.9) !important
 </style>

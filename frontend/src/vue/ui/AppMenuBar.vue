@@ -2,44 +2,48 @@
   <app-modal>
     <div class="app-menu-bar">
       <div class="app-header">
-        <span class="username">
-          <img v-if="imgSrc" :src="imgSrc"/>
+        <div class="user-avatar">
+          <img v-if="imgSrc" :src="imgSrc" alt="用户头像"/>
+        </div>
+        <div class="user-info">
           <div class="user-name">{{ userInfo.user }}</div>
-        </span>
+          <div class="user-status">在线</div>
+        </div>
       </div>
       <div class="app-section">
         <router-link
+          class="menu-item"
           title="创建新的私聊房间"
           to="/create-private-room"
         >
-          私聊用户
+          <i class="icon-user menu-icon"></i>
+          <span class="menu-text">私聊用户</span>
         </router-link>
         <router-link
+          class="menu-item"
           title="创建新的群组房间"
           to="/create-group"
         >
-          创建群组
+          <i class="icon-users menu-icon"></i>
+          <span class="menu-text">创建群组</span>
         </router-link>
-        <router-link title="个人设置" to="/profile">
-          个人资料
+        <router-link class="menu-item" title="个人设置" to="/profile">
+          <i class="icon-user menu-icon"></i>
+          <span class="menu-text">个人资料</span>
         </router-link>
-        <router-link to="/settings">
-          设置
+        <router-link class="menu-item" to="/settings">
+          <i class="icon-cog menu-icon"></i>
+          <span class="menu-text">设置</span>
         </router-link>
-        <router-link
-          v-if="consts.ISSUES"
-          title="提交问题反馈"
-          to="/report-issue"
-        >
-          问题反馈
-        </router-link>
-
+        <div class="menu-divider"></div>
         <a
+          class="menu-item logout-item"
           href="#"
           title="退出登录"
           @click.prevent="signOut"
         >
-          退出登录
+          <i class="icon-logout menu-icon"></i>
+          <span class="menu-text">退出登录</span>
         </a>
       </div>
     </div>
@@ -91,40 +95,82 @@ export default class AppMenuBar extends Vue {
 </script>
 <!-- eslint-disable -->
 <style lang="sass" scoped>
+@import "@/assets/sass/partials/abstract_classes"
 
 .app-menu-bar
-  font-size: 25px
-  background-color: #f8fafc
-  border: 1px #d1d5db solid
-  width: 200px
-
-.user-name
-  font-size: 17px
-  font-weight: bold
-  margin-top: 5px
-
-img
-  border-radius: 50%
-  width: 100px
-  max-height: 120px
-
-%app-common
-  padding: 10px
+  background: white
+  border-radius: 12px
+  width: 280px
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12)
+  overflow: hidden
+  border: 1px solid #e5e7eb
 
 .app-header
-  background-color: #e2e8f0
-  padding: 10px 15px 5px
-  @extend %app-common
+  padding: 30px 25px
+  text-align: center
+  background: #f9fafb
+  border-bottom: 1px solid #e5e7eb
+
+.user-avatar
+  margin-bottom: 15px
+  
+  img
+    border-radius: 50%
+    width: 80px
+    height: 80px
+    border: 3px solid #e5e7eb
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+
+.user-info
+  color: #111827
+
+.user-name
+  font-size: 18px
+  font-weight: 600
+  margin-bottom: 5px
+
+.user-status
+  font-size: 14px
+  color: #6b7280
 
 .app-section
-  @extend %app-common
+  padding: 10px 0
+
+.menu-item
   display: flex
-  flex-direction: column
+  align-items: center
+  padding: 15px 25px
+  color: #374151
+  text-decoration: none
+  transition: all 0.2s ease
+  border-left: 3px solid transparent
+  
+  &:hover
+    background: #f3f4f6
+    border-left-color: #3b82f6
+    color: #111827
 
-  > *
-    padding: 5px
+.menu-icon
+  font-size: 18px
+  margin-right: 15px
+  width: 20px
+  text-align: center
+  color: #6b7280
 
-    &:hover
-      color: #f0f0f0
+.menu-text
+  font-size: 16px
+  font-weight: 500
 
+.menu-divider
+  height: 1px
+  background: #e5e7eb
+  margin: 8px 25px
+
+.logout-item
+  color: #ef4444
+  
+  &:hover
+    background: #fef2f2
+    border-left-color: #ef4444
+    color: #991b1b
 </style>

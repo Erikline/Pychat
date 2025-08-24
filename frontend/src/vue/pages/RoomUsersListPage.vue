@@ -116,41 +116,99 @@ export default class RoomUsersListPage extends Vue {
 <!-- eslint-disable -->
 <style lang="sass" scoped>
 @import "@/assets/sass/partials/room_users_table"
-
 @import "@/assets/sass/partials/abstract_classes"
+
+.current-room-users-table
+  font-size: 16px
+  max-width: 600px
+  width: 100%
+  margin: 20px auto
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)
+  border-radius: 16px
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  backdrop-filter: blur(10px)
+  overflow: hidden
 
 .current-room-users-table-header
   font-size: 20px
-  padding: 10px
+  font-weight: 600
+  padding: 20px 24px
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)
+  color: white
+  text-align: center
+  letter-spacing: 0.5px
 
-.holder
-  @extend %room-settings-holder
-  height: initial // TODO rd87
-
-
-.green-btn
-  flex-shrink: 0
-
-.current-room-users-table
-  font-size: 24px
-  width: 350px
-  margin: auto
+  b
+    color: #e0f2fe
+    font-weight: 700
 
 ul
-  overflow-y: scroll // TODO rd87
-  max-height: calc(50vh - 220px) // TODO rd87
+  overflow-y: auto
+  max-height: 400px
   @extend %ul
-  :deep(li)
-    overflow: initial // TODO rd87 weird bug with zooomed out small li icons when trying to overflow ellipsis text
+  margin: 0
+  padding: 0
+
   &.current-room-users-table-header-single
-    max-height: calc(100vh - 110px)
+    max-height: 500px
+
+  :deep(li)
+    overflow: initial
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+    transition: all 0.2s ease
+    
+    &:last-child
+      border-bottom: none
+    
+    &:hover
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.05) 100%)
+      transform: translateX(2px)
 
 li
   @extend %li
   justify-content: space-between
   display: flex
+  align-items: center
+  padding: 12px 24px
+  height: 48px
+
+.holder
+  @extend %room-settings-holder
+  padding: 24px
+  background: rgba(248, 250, 252, 0.5)
+  border-top: 1px solid rgba(0, 0, 0, 0.05)
+
+.green-btn
+  flex-shrink: 0
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%)
+  border: none
+  border-radius: 8px
+  padding: 12px 24px
+  font-weight: 600
+  color: white
+  transition: all 0.2s ease
+  cursor: pointer
+  
+  &:hover
+    transform: translateY(-1px)
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3)
 
 .usersStateText:hover
   cursor: pointer
-  color: #f1f1f1
+  color: #3b82f6
+
+// 清新主题样式覆盖
+:deep(.user-flag-row)
+  display: flex
+  align-items: center
+  gap: 12px
+  
+  .user-avatar
+    border-radius: 50%
+    border: 2px solid rgba(59, 130, 246, 0.2)
+
+  .user-name
+    font-weight: 500
+    color: #374151
 </style>

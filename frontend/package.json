@@ -48,19 +48,19 @@
     "vite": "^2.9.1",
     "vite-plugin-checker": "^0.4.4",
     "vite-plugin-compression": "^0.5.1",
-
     "vue-tsc": "^0.33.9"
   },
   "dependencies": {
     "emoji-datasource-apple": "^7.0.2",
     "highlight.js": "^11.5.0",
-    "is-mobile": "2.1.0",
-    "lines-logger": "^2.0.2",
+    "is-mobile": "^2.1.0",
+    "lines-logger": "^2.1.2",
     "lodash.debounce": "4.0.8",
     "npm-font-open-sans": "1.1.0",
     "reflect-metadata": "0.1.13",
     "spainter": "^1.2.12",
     "typeface-oswald": "0.0.75",
+    "vite-plugin-static-copy": "^3.1.2",
     "vue": "^3.2.31",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-cropperjs": "^4.2.0",

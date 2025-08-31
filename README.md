@@ -173,8 +173,8 @@ cd frontend
 # 安装依赖（处理Vue3兼容性问题）
 npm install --legacy-peer-deps
 
-# 安装Vue3兼容的 vue-class-component
-npm install vue-class-component@8.0.0-rc.1 --save --legacy-peer-deps
+# 安装Vue3兼容的装饰器库
+npm install vue-class-component@8.0.0-rc.1 vue-property-decorator@npm:@smyld/vue-property-decorator@^10.0.17 --save --legacy-peer-deps
 ```
 
 #### 3.2 启动前端开发服务器
@@ -197,9 +197,73 @@ npm run build
 ### 4. 访问应用
 
 开发环境访问地址：
-- **前端应用**: https://localhost:8081 (或 8080)
+- **前端应用**: https://localhost:8083 (或 8080/8081/8082，取决于端口占用情况)
+
+## 常见问题与解决方案
+
+### Vue 3 兼容性问题
+
+**症状**: 
+- `net::ERR_ABORTED` 404错误，涉及 `vuex-module-decorators.js`、`lines-logger.js` 和 `is-mobile.js`
+- 构建失败：`SyntaxError: The requested module does not provide an export named 'Component'`
+
+**解决方案**:
+1. 使用 `--legacy-peer-deps` 安装依赖
+2. 安装Vue 3兼容的装饰器库：
+   ```bash
+   npm install vue-class-component@8.0.0-rc.1 vue-property-decorator@npm:@smyld/vue-property-decorator@^10.0.17 --save --legacy-peer-deps
+   ```
+3. 清除Vite缓存：
+   ```bash
+   rm -rf node_modules/.vite
+   npm start
+   ```
+
+### 端口占用问题
+
+**症状**: 端口8080被占用，自动切换到8081/8082/8083
+
+**解决方案**: 无需处理，Vite会自动选择可用端口
+
+### 依赖安装失败
+
+**症状**: `ERESOLVE could not resolve` 依赖冲突错误
+
+**解决方案**: 始终使用 `--legacy-peer-deps` 标志：
+```bash
+npm install --legacy-peer-deps
+```
 - **API服务**: https://localhost:8888 (Tornado)
-- **静态文件**: https://localhost:8000 (Django)
+  - **静态文件**: https://localhost:8000 (Django)
+
+## 启动验证清单
+
+成功启动后，您应该看到：
+
+### ✅ 后端验证
+- **Tornado API服务器**: 终端显示 `Starting pinger` 和 `Listening on http://0.0.0.0:8888`
+- **Django静态文件服务器**: 终端显示 `Starting development server at http://0.0.0.0:8000/`
+- **Redis**: `redis-cli ping` 返回 `PONG`
+
+### ✅ 前端验证
+- **Vite开发服务器**: 终端显示 `vite v2.9.1 dev server running at:`
+- **访问地址**: https://localhost:8083 (或自动选择的端口)
+- **浏览器控制台**: 无404依赖错误，仅websql警告可忽略
+
+### ✅ 完整启动命令总结
+```bash
+# 终端1 - Redis (如未启动)
+redis-server
+
+# 终端2 - Tornado API
+cd backend && source venv38/bin/activate && python manage.py start_tornado --port 8888 --host 0.0.0.0
+
+# 终端3 - Django静态文件
+cd backend && source venv38/bin/activate && python manage.py runserver 0.0.0.0:8000
+
+# 终端4 - 前端开发服务器
+cd frontend && npm start
+```
 
 **服务架构说明**:
 - **Tornado (8888)**: 处理 WebSocket 连接和 API 请求 (`/api/*`, `/ws`)
